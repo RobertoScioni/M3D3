@@ -9,9 +9,11 @@ const image1 = (key) => {
 			console.log(images)
 			document.querySelectorAll("#deck .card-img-top").forEach((element) => {
 				let newimg = document.createElement("img")
-				newimg.src = body.images[i].url
+				newimg.src = images[i].url
 				newimg.classList.add("card-img-top", "ours")
 				element.parentNode.replaceChild(newimg, element)
+				console.log(newimg.parentElement.querySelector("small").innerText)
+				newimg.parentElement.querySelector("small").innerText = images[i].id
 				i++
 			})
 		})
@@ -24,7 +26,14 @@ window.onload = () => {
 const makeModals = () => {
 	document.querySelectorAll("#deck .btn-group").forEach((element, index) => {
 		element.lastElementChild.innerHTML = "Hide"
+		element.lastElementChild.addEventListener("click", hide)
 	})
+}
+
+const hide = (event) => {
+	event.target.parentElement.parentElement.parentElement.parentElement.classList.add(
+		"d-none"
+	)
 }
 
 const viewclick = (index) => {
