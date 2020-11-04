@@ -1,20 +1,26 @@
 const image1 = (key) => {
+	if (key === "search") {
+		key = document.querySelector("#query").value
+	}
+
 	fetch("http://www.splashbase.co/api/v1/images/search?query=" + key, {
 		method: "GET",
 	})
 		.then((response) => response.json())
 		.then((body) => {
 			let images = body.images
-			let i = 0
+			if (images.length < 9) {
+				alert("not enough results")
+				return
+			}
 			console.log(images)
-			document.querySelectorAll("#deck .card-img-top").forEach((element) => {
+			document.querySelectorAll("#deck .card-img-top").forEach((element, i) => {
 				let newimg = document.createElement("img")
 				newimg.src = images[i].url
 				newimg.classList.add("card-img-top", "ours")
 				element.parentNode.replaceChild(newimg, element)
 				console.log(newimg.parentElement.querySelector("small").innerText)
 				newimg.parentElement.querySelector("small").innerText = images[i].id
-				i++
 			})
 		})
 }
