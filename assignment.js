@@ -23,10 +23,7 @@ window.onload = () => {
 
 const makeModals = () => {
 	document.querySelectorAll("#deck .btn-group").forEach((element, index) => {
-		//element.firstChild.setAttribute("data-toggle", "modal")
-		element.firstElementChild.setAttribute("data-toggle", "modal")
-		element.firstElementChild.setAttribute("data-target", "#exampleModal")
-		element.addEventListener(click, viewclick(index))
+		element.lastElementChild.innerHTML = "Hide"
 	})
 }
 
