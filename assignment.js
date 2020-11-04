@@ -22,13 +22,18 @@ window.onload = () => {
 }
 
 const makeModals = () => {
-	document.querySelectorAll("#deck .btn-grp").forEach((element) => {
-		element.firstChild.setAttribute("data-toggle", "modal")
-		element.firstChild.setAttribute("data-target", "#exampleModal")
+	document.querySelectorAll("#deck .btn-group").forEach((element, index) => {
+		//element.firstChild.setAttribute("data-toggle", "modal")
+		element.firstElementChild.setAttribute("data-toggle", "modal")
+		element.firstElementChild.setAttribute("data-target", "#exampleModal")
+		element.addEventListener(click, viewclick(index))
 	})
 }
 
-const viewclick = (Event) => {
-	console.log(Event.target)
-	console.log(Event)
+const viewclick = (index) => {
+	document.querySelector("#modalImage").src = document.querySelectorAll(
+		"#deck .card-img-top"
+	)[index].src
+	console.log(document.querySelectorAll("#deck .card-img-top")[index].src)
+	document.querySelector("#modalImage").style = "width:250px"
 }
